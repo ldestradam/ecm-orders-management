@@ -6,6 +6,6 @@ import mx.com.ecm.order.management.domain.valueObject.TrackingId;
 import java.util.Optional;
 
 public interface OrderRepository {
-    Order create(Order order);
+    Order save(Order order);
     Optional<Order> findByTrackingId(TrackingId trackingId);
 }

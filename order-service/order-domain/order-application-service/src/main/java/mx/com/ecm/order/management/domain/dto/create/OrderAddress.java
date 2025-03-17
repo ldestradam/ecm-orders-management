@@ -12,7 +12,7 @@ import lombok.Getter;
 public class OrderAddress {
     @NotNull
     @Max(value = 50)
-    private final String addressLine;
+    private final String street;
     @NotNull
     @Max(value = 10)
     private final String postalCode;

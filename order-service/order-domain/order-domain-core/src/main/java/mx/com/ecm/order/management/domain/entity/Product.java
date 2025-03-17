@@ -4,6 +4,8 @@ import mx.com.ecm.order.management.domain.entity.BaseEntity;
 import mx.com.ecm.order.management.domain.valueobject.Money;
 import mx.com.ecm.order.management.domain.valueobject.ProductId;
 
+import java.util.UUID;
+
 public class Product extends BaseEntity<ProductId> {
     private String name;
     private Money price;
@@ -12,6 +14,10 @@ public class Product extends BaseEntity<ProductId> {
         this.setId(productId);
         this.name = name;
         this.price = price;
+    }
+
+    public Product(ProductId productId) {
+        this.setId(productId);
     }
 
     public String getName() {
