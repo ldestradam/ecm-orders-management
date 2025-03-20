@@ -3,6 +3,7 @@ package mx.com.ecm.order.management.domain.mapper;
 import mx.com.ecm.order.management.domain.dto.create.CreateOrderCommand;
 import mx.com.ecm.order.management.domain.dto.create.CreateOrderResponse;
 import mx.com.ecm.order.management.domain.dto.create.OrderAddress;
+import mx.com.ecm.order.management.domain.dto.track.TrackOrderResponse;
 import mx.com.ecm.order.management.domain.entity.Order;
 import mx.com.ecm.order.management.domain.entity.OrderItem;
 import mx.com.ecm.order.management.domain.entity.Product;
@@ -44,6 +45,14 @@ public class OrderDataMapper {
         return CreateOrderResponse.builder()
                 .orderTrackingId(order.getTrackingId().getValue())
                 .orderStatus(order.getOrderStatus())
+                .build();
+    }
+
+    public TrackOrderResponse orderToTrackOrderResponse(Order order) {
+        return TrackOrderResponse.builder()
+                .orderTrackerId(order.getTrackingId().getValue())
+                .orderStatus(order.getOrderStatus())
+                .failureMessages(order.getFailureMessages())
                 .build();
     }
 
