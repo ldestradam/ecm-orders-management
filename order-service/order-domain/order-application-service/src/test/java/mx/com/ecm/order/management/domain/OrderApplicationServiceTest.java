@@ -1,6 +1,7 @@
 package mx.com.ecm.order.management.domain;
 
 import mx.com.ecm.order.management.domain.dto.create.CreateOrderCommand;
+import mx.com.ecm.order.management.domain.dto.create.CreateOrderResponse;
 import mx.com.ecm.order.management.domain.dto.create.OrderAddress;
 import mx.com.ecm.order.management.domain.dto.create.OrderItem;
 import mx.com.ecm.order.management.domain.entity.Customer;
@@ -14,6 +15,7 @@ import mx.com.ecm.order.management.domain.port.output.repository.OrderRepository
 import mx.com.ecm.order.management.domain.port.output.repository.RestaurantRepository;
 import mx.com.ecm.order.management.domain.valueobject.*;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +25,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -157,7 +161,14 @@ public class OrderApplicationServiceTest {
         when(restaurantRepository.findRestaurantInformation(orderDataMapper.createOrderCommandToRestaurant(createOrderCommand)))
             .thenReturn(Optional.of(restaurant));
         when(orderRepository.save(any(Order.class))).thenReturn(order);
+    }
 
+    @Test
+    public void shouldCreateOrder() {
+        CreateOrderResponse createOrderResponse = orderApplicationService.createOrder(createOrderCommand);
+        assertEquals(OrderStatus.PENDING, createOrderResponse.getOrderStatus());
+        assertEquals("Order created successfully", createOrderResponse.getMessage());
+        assertNotNull(createOrderResponse.getOrderTrackingId());
     }
 
 

@@ -2,6 +2,7 @@ package mx.com.ecm.order.management.domain;
 
 import mx.com.ecm.order.management.domain.port.output.messagepublisher.payment.OrderCancelledPaymentRequestMessagePublisher;
 import mx.com.ecm.order.management.domain.port.output.messagepublisher.payment.OrderCreatedPaymentRequestMessagePublisher;
+import mx.com.ecm.order.management.domain.port.output.messagepublisher.restaurantapproval.OrderPaidRestaurantRequestMessagePublisher;
 import mx.com.ecm.order.management.domain.port.output.repository.CustomerRepository;
 import mx.com.ecm.order.management.domain.port.output.repository.OrderRepository;
 import mx.com.ecm.order.management.domain.port.output.repository.RestaurantRepository;
@@ -20,6 +21,11 @@ public class OrderTestConfiguration {
     @Bean
     public OrderCancelledPaymentRequestMessagePublisher orderCancelledPaymentRequestMessagePublisher(){
         return Mockito.mock(OrderCancelledPaymentRequestMessagePublisher.class);
+    }
+
+    @Bean
+    public OrderPaidRestaurantRequestMessagePublisher orderPaidRestaurantRequestMessagePublisher(){
+        return Mockito.mock(OrderPaidRestaurantRequestMessagePublisher.class);
     }
 
     @Bean
